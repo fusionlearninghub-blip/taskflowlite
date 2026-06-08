@@ -1,0 +1,60 @@
+name: Android APK Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Generate Android project
+        run: npx expo prebuild --platform android --clean --non-interactive
+
+      - name: Build release APK with Gradle
+        working-directory: android
+        run: ./gradlew assembleRelease
+
+      - name: Copy APK
+        run: cp android/app/build/outputs/apk/release/app-release.apk taskflowlite-${{ github.ref_name }}.apk
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Task Flow Lite ${{ github.ref_name }}
+          body: |
+            Task Flow Lite Android APK.
+
+            - Add tasks
+            - Complete and reopen tasks
+            - Store tasks locally on the device
+          files: taskflowlite-${{ github.ref_name }}.apk

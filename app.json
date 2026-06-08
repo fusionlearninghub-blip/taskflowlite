@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "Task Flow",
+    "slug": "taskflowlite",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f7fbff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.fusionlearninghub.taskflowlite"
+    },
+    "android": {
+      "package": "com.fusionlearninghub.taskflowlite",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1787ff"
+      },
+      "versionCode": 1
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "appDisplayName": "Task Flow"
+    }
+  }
+}
