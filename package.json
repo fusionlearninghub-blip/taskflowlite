@@ -8,6 +8,7 @@
     "android": "expo run:android",
     "prebuild": "expo prebuild --platform android",
     "test": "jest --watchAll=false",
+    "test:ci": "node scripts/smoke-test.js",
     "lint": "eslint .",
     "build:apk": "cd android && ./gradlew assembleRelease"
   },
